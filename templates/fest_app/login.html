@@ -1,0 +1,18 @@
+{% extends 'fest_app/base.html' %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1>Menager Login</h1>
+    <form action="{% url 'fest_app:manager_login' %}" method="post">
+        {% csrf_token %}
+        <label for="username">Email:</label>
+        <input type="text" name="username" placeholder='Enter email'>
+
+        <label for="password">Password</label>
+        <input type="password" name="password">
+
+        <input type="submit" name="" value='Login'>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "fest_app/base.html" %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+<h3 style='text-align: center;margin-top: 20px'>Prijavi se na festival</h3>
+<form method="post" enctype="multipart/form-data">{% csrf_token %}
+<div class="container">
+    <div class="columns">
+        <div class="column is-half is-offset-one-quarter", >
+            <div class="form-row">
+            {{ form.first_name|as_crispy_field }}
+            
+            <div class="form-group col-md-6 mb-0">
+                {{ form.last_name|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.email|as_crispy_field }}
+            </div>
+            </div>
+            
+            {{ initial.festival|as_crispy_field }}
+            
+            </div> 
+        </div>
+    </div>
+  <button type="submit" class="btn btn-primary" style='margin-top: 20px'>Add</button>
+</div>
+</form>
+
+<a href="/">
+    <button>Back</button>
+</a>
+
+{% endblock %}

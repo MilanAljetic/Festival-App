@@ -1,0 +1,56 @@
+{% extends "fest_app/base.html" %}
+{% load static %}
+{% block title %}
+{{ festival.name }}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <main class="pt-5">
+        <div class="row g-3">
+            <div class="col-md-5 col-lg-5 order-md-first bg-light">
+                <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image" src="{{ festival.image.url }}">
+            </div>
+            <div class="col-md-7 col-lg-7 ps-md-3 ps-lg-5">
+                <h1 class="mb-0 h4">{{ festival.name }}</h1>
+                <p><span class="lead">{{ festival.city }}</span></p>
+                <p>{{ festival.description|slice:":355" }}...</p>
+                <div class="border">
+                    <div class="col border-bottom">
+                        <div class="row p-3">
+                            <div class="col-6">Festival Start:</div>
+                            <div class="col-6 text-end"><span class="h4 fw-bold">{{ festival.start_date }}</span></div>
+                        </div>
+                        <div class="row p-3">
+                            <div class="col-6">Festival End:</div>
+                            <div class="col-6 text-end"><span class="h4 fw-bold">{{ festival.finish_date }}</span></div>
+                        </div>
+                    </div>
+                {% if user.is_authenticated %}
+                <a class='btn btn-primary' href="{% url 'fest_app:festival_update' slug=festival.slug %}" >
+                    Update<!-- <span class="glyphicon glyphicon-pencil"></span> -->
+                </a>
+
+                <a class='btn btn-danger' href="{% url 'fest_app:festival_delete' slug=festival.slug %}">
+                    Delete<!-- <span class='glyphicon glyphicon-remove'></span> -->
+                </a>
+
+                <a class='btn btn-info' href="{% url 'fest_app:user_list' slug=festival.slug %}">
+                    User list <!-- <span class='glyphicon glyphicon-remove'></span> -->
+                </a>
+                {% else %}
+                <a class='btn btn-primary' href="{% url 'fest_app:user_apply' slug=festival.slug %}" >
+                    Sing Up!<!-- <span class="glyphicon glyphicon-pencil"></span> -->
+                </a>
+
+                {% endif %}
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+
+</div>
+
+
+
+{% endblock %}

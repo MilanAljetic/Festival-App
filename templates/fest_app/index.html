@@ -1,0 +1,92 @@
+{% extends "./base.html" %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+
+<main>
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-3">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="h1 fw-bold">Visit Festivals!</h1>
+        <p class="lead text-muted">A festival is an event ordinarily celebrated by a community and centering on some characteristic 
+        aspect of that community and its religion or cultures. It is often marked as a local or national holiday, mela, or eid. ... Food is such a vital resource that many festivals are associated with harvest time.</p>
+        {% if user.is_authenticated %}
+        <p>
+          <a href="{% url 'fest_app:add_festival' %}" class="btn btn-primary my-2">Add new Festival</a>
+        </p>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+      {% for contact in page_obj %}
+        {# Each "contact" is a Contact model object. #}
+        <div class="col">
+          <div class="card shadow-sm">
+
+            {% if contact.image %}
+            <img class="img-fluid" alt="Responsive image" src="{{ contact.image.url|default_if_none:'#' }}">
+            {% endif %}
+
+            <div class="card-body">
+              <p class="card-text">
+                <a class="text-dark text-decoration-none" href="{{ contact.get_absolute_url }}">{{ contact.name }}</a>
+              </p>
+
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">{{ contact.city }}</small>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">Start time:{{ contact.start_date|date:"M d, Y" }}</small>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">Finish time:{{ contact.finish_date|date:"M d, Y" }}</small>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">{{ contact.country}},{{contact.city}},{{contact.address }}</small>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        
+        {% endfor %}
+        </div>
+
+
+
+
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+  </div>
+
+
+</main>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "fest_app/base.html" %}
+
+{% block content %}
+<form method='post'>
+    {% csrf_token %}
+    <p>Sigurni ste da hoćete da obrišete {{ object }}</p>
+    <input type="submit" class='btn btn-danger' value='Confirm'>
+</form>
+{% endblock %}
