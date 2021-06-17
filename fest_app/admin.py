@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from django.forms import Textarea, TextInput
 
 from .models import City, Festival, Manager, State, Users
 
@@ -31,6 +30,8 @@ class FestivalAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug', 'start_date', 'finish_date', 'country', 'city']
     list_filter = ['city', 'country']
     prepopulated_fields = {'slug': ('name',)}
+
+
 
 
 @admin.register(Users)

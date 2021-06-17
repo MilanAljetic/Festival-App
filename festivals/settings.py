@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-
+import MySQLdb
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -66,12 +66,8 @@ WSGI_APPLICATION = 'festivals.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -124,6 +120,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 AUTH_USER_MODEL = 'fest_app.Manager'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
 
 GOOGLE_MAPS_API_KEY = "AIzaSyBqsr9lN4osCG7fSvdyRhrxWhg5TcG5WRc"
 # Default primary key field type
