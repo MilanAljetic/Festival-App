@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import EmailInput, TextInput
-from mapwidgets.widgets import GooglePointFieldWidget
+
 
 from .models import Festival, Manager, Users
 
@@ -31,7 +31,6 @@ class FestivalForm(forms.ModelForm):
             'finish_date': DateInput(attrs={'style': 'width: 300px'}),
             'name': TextInput(attrs={'class': "form-control", 'style': 'max-width: 300px;'}),
             'description': forms.Textarea(attrs={'class': 'textarea', 'style': 'width: 50%;', 'placeholder' : 'Describe festival...'}),
-            'location': GooglePointFieldWidget,
         }
         
 class UserForm(forms.ModelForm):
